@@ -87,8 +87,26 @@ export default rootReducer;
 ```
 
 #### ACTIONS 
+- Actions are payloads of information that send data from your application to your store. They are the only source of information for the store. You send them to the store using store.dispatch().
 
+- we can save actions in seperate file :
+```
+export const ADD_TODO = "ADD_TODO";
+export const DELETE_TODO = "DELETE_TODO";
+export const TOGGLE_DONE = "TOGGLE_DONE";
+```
+and import inside actions folder
 
+```
+import { ADD_TODO, TOGGLE_DONE } from "../constants/index";
+
+export function addTodo(title) {
+  return { type: ADD_TODO, title };
+}
+export function toggleDone(taskId) {
+  return { type: TOGGLE_DONE, taskId };
+}
+```
 
 
 #### CHANGING THE STATE 
