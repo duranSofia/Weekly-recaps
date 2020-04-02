@@ -143,24 +143,24 @@ npx create-react-app my-app --template redux
 
 #### Folder structure :
 
-src
-   Components
+* src
+   - Components
       - Component1.jsx
       - Component2.jsx
-   actions
+  -  actions
       - index.js
-   constants
+  -  constants
       - index.js
-   reducers
+  -  reducers
       - index.js
-   store
+  -  store
       - index.js
-   index.js
-App.js
-App.test.js
-index.css
-index.js
-etc. 
+  -  index.js
+* App.js
+* App.test.js
+* index.css
+* index.js
+* etc. 
 
 
 in index.js 
