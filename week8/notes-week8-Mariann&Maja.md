@@ -5,9 +5,10 @@ It is most commonly used with libraries/frameworks such as React or Angular for 
 
 
 set up : 
- **NPM** - npm install redux
 
-**Yarn** - yarn add redux
+**NPM** - ```npm install redux```
+
+**Yarn** - ```yarn add redux```
 
 
 
@@ -89,7 +90,7 @@ export default rootReducer;
 #### ACTIONS 
 - Actions are payloads of information that send data from your application to your store. They are the only source of information for the store. You send them to the store using store.dispatch().
 
-- we can save actions in seperate file :
+- we can save actions in seperate file  **constants**:
 ```
 export const ADD_TODO = "ADD_TODO";
 export const DELETE_TODO = "DELETE_TODO";
@@ -131,10 +132,68 @@ filterSelector.addEventListener(
 
 
 
-with React 
-
+### with React 
 
 redux template :
+
 ```
 npx create-react-app my-app --template redux
+```
+
+
+#### Folder structure :
+
+src
+   Components
+      - Component1.jsx
+      - Component2.jsx
+   actions
+      - index.js
+   constants
+      - index.js
+   reducers
+      - index.js
+   store
+      - index.js
+   index.js
+App.js
+App.test.js
+index.css
+index.js
+etc. 
+
+
+in index.js 
+wrap the root <App/> inside the <Provider/>
+
+```
+import { Provider } from "react-redux";
+import store from "./Redux-demo/store/index";
+...
+
+ReactDOM.render(
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById("root")
+);
+```
+
+
+## Closures in node.js
+-  function defined within another scope that has access to all the variables within the outer scope. A Closure allows us a free environment for the outer function to access the inner functions and inner variables without any scope restrictions.
+- In other words, a closure gives you access to an outer function’s scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
+
+in this example displayName() can access the variable name declared in the parent function, init().
+```
+function init() {
+  var name = 'Maja'; // name is a local variable created by init
+  function displayName() { // displayName() is the inner function, a closure
+    alert(name); // use variable declared in the parent function
+  }
+  displayName();
+}
+init();
 ```
