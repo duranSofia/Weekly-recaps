@@ -233,3 +233,154 @@ solution 3
                             }
                           }
                           fibonacci(x);
+                          
+                          
+                          
+##  React Lifecycle
+Common React Lifecycle methods
+3 phases - Mounting, Updating and Unmounting
+
+
+Mounting phase
+= component is born
+
+1. Constructor
+* Initializing local state by assigning an object to this.state()
+
+* Binding event handler methods to an instance
+
+```
+constructor(props) {
+   super(props);
+   this.state = {
+         firstName: "Louisa"
+         };
+         this.onClickHandler = this.onClickHandler.bind(this);
+ }
+ 
+ ```
+2. Render
+
+* only required method within a class component
+
+* happens during the mounting and updating
+
+``
+ class Test extends Component {
+     render() {
+         return <div>Test</div>
+         }
+  }
+  
+ ```
+ 
+3. ComponentDidMount
+* method is called when the component is mounted
+
+* for API calls and setState()
+
+```
+componentDidMount() {
+   // The component is fully created
+    fetch('./api/some.json')
+     .then(response => response.json())
+     .then(data => console.log('Data:', data))
+     .catch(err => console.error('Fetch Error:', err));
+ }
+ ```
+ 
+Updating phase
+* component is growing
+
+1. Render
+
+* also called during the updating phase through setState() and forceUpdate() methods
+
+2. ComponentDidUpdate
+
+* is called when the component is updating - with setState() or forceUpdate()
+
+* for API calls
+
+```
+  // Typical usage (don't forget to compare props):
+         if (this.props.userID !== prevProps.userID) {
+           this.fetchData(this.props.userID); 
+         }
+    }
+    
+    ```
+    
+Unmounting phase
+
+* component is killed
+
+componentWillUnmount
+
+* is called when the component is unmounted and destroyed
+* for destroying timers,
+* canceling network requests,
+* cleaning up subscriptions that were created in componentDidMount().
+
+```
+	clearInterval(this.timerID);
+}
+
+```
+
+### Uncommon React Lifecycle methods
+
+Mounting phase / updating phase
+
+1. GetDerivedStateFromProps
+
+* static method
+
+* returns an object to update the state
+
+* called before the render()
+
+* can be used to synchronize props value with state value
+
+
+```
+ if (props.selected !== state.selected) {
+   return {
+     selected: props.selected, };}
+      // Return null if the state hasn't changed
+      return null;
+      }
+  ```
+
+Updating phase
+
+2. ShouldComponentUpdate
+* returns a boolean in order to know if the component can be updated
+
+* can be used to check a previous and next value
+
+```
+     return this.props.title !== nextProps.title ||
+			    this.state.input !== nextState.input 
+   }
+   ```
+
+
+3. GetSnapshotBeforeUpdate
+
+* is called after the render()
+
+* enables component to capture information from the DOM before it is changed
+
+
+```
+  // Are we adding new items to the list?
+  // Capture the scroll position so we can adjust scroll later.
+  if (prevProps.list.length < this.props.list.length) {
+    const list = this.listRef.current;
+    return list.scrollHeight - list.scrollTop;
+  }
+  return null;
+ }
+ 
+ ```
