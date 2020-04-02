@@ -5,9 +5,9 @@ It is most commonly used with libraries/frameworks such as React or Angular for 
 
 
 set up : 
-### NPM - npm install redux
+ **NPM** - npm install redux
 
-### Yarn - yarn add redux
+**Yarn** - yarn add redux
 
 
 
