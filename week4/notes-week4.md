@@ -1,91 +1,368 @@
-## Node.js
-Node.js is an open source, cross-platform, Javascript runtime environment, optimised for scalability with many input/output operations (wikipedia).
+## React.js Introduction
 
-### Modules
-module.exports lets you expose code to the rest of the application.
-```
-module.exports = () => {
-  const message = "Hello World";
-  console.log(message);
-}
-```
-The require statement allows to "load" an external module by specifying the file path.
-```
-const helloworld = require('./hello');
-```
-HTTP module
-http.createServer() takes a function as a parameter that will be called for each connection to the server.
-
-listen() listens for incoming connections on port 3000.
-```
-const http = require('http');
-
-const server = http.createServer((request, response) => {
-    response.writeHead(200);
-    response.end('Hello World');
-});
-
-server.listen(3000);
-console.log('Server address: http://localhost:3000');
-```
-## npm
-NPM and Yarn are different package managers but they both get their packages from the NPM registry.
-
-Creates the package.json file
-```
-$ npm init
-```
-install dependencies(locally)
-``` 
- npm install package_name --save
- ```
-install dependencies(globally)
-```
-npm install package_name --save -g
-```
-.gitignore
-.gitignore is a special file used by git where you can specify files and folders that you want to keep out of the GIT repository.
-
-Package.json
-```
- "devDependencies": {},
-  "scripts": {
-    "start": "node main.js",
-    "sample": "echo “Sample” && node main.js"
-  },
-```
-
-## React
-What is React? React is a way to build user interfaces. It is only concerned with what you see on the front-end. React makes user interfaces very easy to build by cutting each page into pieces. We call these pieces components.
+* Developed by Facebook, first version 2013
+* open source library, not framework
+* to solve the problem of complex states changing without reloading the rest of the DOM
+* compares state of what you are writing with Virtual DOM and changes what needs to be changed in the view port
+that's what makesit so fast
+* Can use it on the DOM, mobile apps (React.native) and terminal
+* Used by Netflix, Airbnb, Instagram …
 
 ### Components
-A React component is a bit of code that represents a piece of the page. Each component is a JavaScript function that returns a piece of code that represents a piece of a web page. Image of components
 
-#### props & stats
-State can be changed (Mutable) Whereas Props can't (Immutable)
+* Core concept
+* React splits the UI into components
+* component hierarchy: component can contain multiple components (children)
+* Conceptually, components are like JavaScript functions
+* accept arbitrary inputs (called "props") and return React elements describing what should appear on the screen
 
-Image of props and state
+#### Types of components
 
-#### State
-State is way to update our UI based on events.
+• Class components vs Functional components (and container)
 
-class Card extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bg: "pink"
-    };
-  }
-A constructor method of a React component always needs to call super(props) before anything else. we have an object representing our components state.In the render function, this is always referring to the component it is within.
+##### Class component
 
-changeColor = () => {
-    this.setState({ bg: "grey" });
-  };
-We can change state with this.setState(), if we give it a new object representing the new state. When we change the state of our component, it will call the render function again.
+• class inherits from React.Component
+• the render() method must return JSX or null
+• Class components MUST have a render method
+• and always needs to return() something
+• component that needs to be aware of its own state: a javascript object used to record and react to user events
+• when a component state is changed, the component rerenders (plus its child components) - to use state inside a component, you need to initialize the state object
+
+
+Example:
 
 ```
-Importing a Component
-import React from "react";
-import "./index.css";
-import Card from "@material-ui/core/Card";
+import React, { Component } from 'react'; //destructured ```
+class Welcome extends Component { //destructured
+  constructor(props) {
+    super(props);
+    this.state = { message: 'Welcome to the Welcome Page!'};
+  }
+  
+  render() {
+    return (
+      <div className="welcome-component">
+        {this.state.message}
+      </div>
+    );
+  }
+}
+
+export default Welcome;
+````
+
+#### Functional Component
+
+• regular JS function
+• Less code in functional components
+• name must start with a capital letter
+• must return JSX or null
+
+```
+import React from 'react';
+
+const ExampleComponent = ({message}) => {
+  const showMessage = (event) => {
+     alert(`The message is: ${message}`);
+   };
+   
+   return (
+    <div>
+      <a href="#" onClick={showMessage}>show me</a>
+    </div>
+   );
+  }
+ 
+ export default ExampleComponent;
+ ````
+ 
+ 
+### JSX
+
+
+• JSX = Javascript + XML
+• neither HTML nor a string
+• JSX is a statically-typed, object-oriented programming language designed to run on modern web browsers
+• faster: performs optimization while compiling the source code to JavaScript
+• safer: statically-typed and mostly type-safe, many errors caught during compilation process
+• easier: offers a solid class system, without having to use prototype-based inheritance system provided by JavaScript
+
+
+
+#### Nested Elements
+• to return more elements, we need to wrap it with one container element
+
+
+App.jsx
+
+```
+import React from 'react';
+
+class App extends React.Component {
+   render() {
+      return (
+         <div>
+            <h1>Header</h1>
+            <h2>Content</h2>
+            <p>This is the content!!!</p>
+         </div>
+      );
+   }
+}
+export default App;
+```
+
+### JavaScript Expressions
+• JavaScript expressions must be wrapped it with curly brackets {}
+
+The example renders “2”.
+
+```
+
+import React from 'react';
+
+class App extends React.Component {
+   render() {
+      return (
+         <div>
+            <h1>{1+1}</h1>
+         </div>
+      );
+   }
+}
+export default App;
+````
+
+#### Conditions
+
+• cannot use if else statements inside JSX!
+• instead conditional (ternary) expressions
+
+```
+import React from 'react';
+
+class App extends React.Component {
+   render() {
+      var i = 1;
+      return (
+         <div>
+            <h1>{i == 1 ? 'True!' : 'False'}</h1>
+         </div>
+      );
+   }
+}
+export default App;
+```
+
+#### Styling
+
+• React recommends using inline styles
+• camelCase syntax.
+
+```
+import React from 'react';
+
+class App extends React.Component {
+   render() {
+      var myStyle = {
+         fontSize: 100,
+         color: '#FF0000'
+      }
+      return (
+         <div>
+            <h1 style = {myStyle}>Header</h1>
+         </div>
+      );
+   }
+}
+export default App;
+```
+
+### Naming Convention
+
+• HTML tags use lowercase tag names
+• React components start with Uppercase
+• use className and **htmlFor **as XML attribute names instead of class and for
+
+
+
+### Tooling
+React apps require third party tools to run
+
+### Webpack
+• is a bundler
+• mashes all .js files and .css files into one .js and one .css
+
+### Babel
+• Javascript transpiler
+• makes newest JS features compatible with most browsers
+
+### Setup
+• Create React App: configures all the necessary tools
+• npx create-react-app (package runner tool that comes with npm 5.2+)
+• downside is less flexibility and more files than needed
+
+React Props
+• a React application has components
+• are hierarchically organized
+• based on a main component (App by default)
+• Props enable a parent component to pass information to a child component
+• only in this way
+• Props are arguments passed into React components
+• are passed to components via HTML attributes
+• Example Add a "brand" attribute to the Car element:
+
+
+```
+const myelement = <Car brand="Ford" />;
+```
+
+The component receives the argument as a props object:
+
+```
+
+class Car extends React.Component {
+  render() {
+    return <h2>I am a {this.props.brand}!</h1>;
+  }
+}
+```
+
+
+
+Props pass Data from one component to another, as parameters. Send the "brand" property from the Garage component to the Car component:
+```
+class Car extends React.Component {
+  render() {
+    return <h2>I am a {this.props.brand}!</h2>;
+  }
+}
+
+class Garage extends React.Component {
+  render() {
+    return (
+      <div>
+      <h1>Who lives in my garage?</h1>
+      <Car brand="Ford" />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Garage />, document.getElementById('root'));
+
+```
+
+### Access props
+• are accessible in the child component (read only):
+• via this.props in a class component
+• via props in a functional component
+
+### Prop types
+•  Contrary to the attributes passed to markup, props can be of any datatype: Boolean, number, string, object, array, function, etc.
+
+### Boolean props
+• special case!
+• not necessary to pass a true/false value, just the prop name
+
+```
+render() {
+    // No need for "released={true}"!
+    return (
+        <Movie
+            released
+        />
+    )
+}
+render() {
+    // This will work the same way as if you passed "released={false}"!
+    return (
+        <Movie />
+    )
+}
+
+```
+If the boolean value is contained within a variable, the you'll have to pass it.
+```
+render() {
+    let booleanVariable = true; // this will often be calculated
+    return (
+        <Movie
+            released={booleanVariable}
+        />
+    )
+}
+```
+
+### Destructuring props
+•  good practice: to improve readability
+
+
+```
+render() {
+    return (
+      <section>
+        {this.props.loading ? (
+          <div className="loader">
+            <ClipLoader color={'white'} loading={this.props.loading} />
+          </div>
+        ) : (
+          <div className="results">
+            {this.props.error.errorHappened ? (
+              <h1>{this.props.error.errorMsg}</h1>
+            ) : (
+                <div>No Error </div>
+          </div>)
+    </section>
+   ```
+   
+ 
+** Destructuring the props:
+```
+render() {
+const { loading, errorMsg, errorHappened } = this.props
+    return (
+      <section>
+        {loading ? (
+          <div className="loader">
+            <ClipLoader color={'white'} loading={loading} />
+          </div>
+        ) : (
+          <div className="results">
+            {errorHappened ? (
+              <h1>{errorMsg}</h1>
+            ) : (
+                <div>No Error </div>
+          </div>)
+    </section>
+    
+```
+    
+    
+### Using the spread operator
+•  to pass all key/values of an object as individual props
+• it can also:
+• Copying an array
+• Concatenating or combining arrays
+• Using Math functions
+•  Using an array as arguments
+• Adding an item to a list
+• Adding to state in React
+• Combining objects
+• Converting NodeList to an array
+
+Example: without
+
+
+
+function App() {
+  return <Hello firstName="Ahmed" lastName="Bouchefra" />;
+}
+Using the Spread operator, you would write the following code instead:
+
+function App() {
+  const props = {firstName: 'Ahmed', lastName: 'Bouchefra'};
+  return <Hello {...props} />;
+}
 ```
