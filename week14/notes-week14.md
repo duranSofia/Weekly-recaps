@@ -45,23 +45,21 @@ Arrays are objects!
 typeof(typeof(42));
 "number"- that is a "string"
 
-typeof(“undefined”);
-Uncaught SyntaxError: Invalid or unexpected token
-
-typeof(value)
+typeof(undefined);
 "undefined"
+
 ``
 
 Some interview questions:
 
 `// Question: What is the value of foo.length? var foo = []; foo.push(1); foo.push(2); 2`
 
-``
+```
 What will be logged and why
 let reaction = 'yikes';
 reaction[0] = 'l';
 console.log(reaction);
-
+yikes
 ```
 
 Fibonacci:
@@ -79,9 +77,6 @@ f(n) = f(n-1) + f(n-2)
 ```
 
 function fibonacci(num){
-let arr = [0, 1];
-
-function fib(n){
 let arr = [0, 1];
 for (let i = 2; i < n + 1; i++){
 arr.push(arr[i - 2] + arr[i -1])
