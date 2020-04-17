@@ -11,7 +11,7 @@ string: "hello"
 number: 1,2,3
 Boolean: true, false
 Null: null
-symbol: \* + #
+symbol: symbol(‘hello’)
 BigInt: 10n
 
 Their value is immuntable! So they cannot be changed.
@@ -52,7 +52,6 @@ typeof(undefined);
 
 Some interview questions:
 
-`// Question: What is the value of foo.length? var foo = []; foo.push(1); foo.push(2); 2`
 
 ```
 What will be logged and why
