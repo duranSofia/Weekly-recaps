@@ -18,15 +18,16 @@ Their value is immuntable! So they cannot be changed.
 
 The typeOf method can be fun to play with.
 
-`typeof(10) "number" typeof(true) "boolean" typeof(undefined) "undefined"`
-
+```
+typeof(10) "number" typeof(true) "boolean" typeof(undefined) "undefined"`
+```
 all good with these. but:
 
-``
+```
 typeof(null)
 "object"
 
-``
+```
 Null is an object that is a bug. And it cannot be fixed because it would break the existing codebase, and it would break millions of websites...
 
 **Non-primitives**
@@ -36,12 +37,13 @@ Object: {};
 Array: ["apple", "orange", "banana"]
 
 Non-primitives values are mutable, they can be changed after its creation!
-
+```
 `typeof([1,2,3]); "object"`
+```
 
 Arrays are objects!
 
-``
+```
 typeof(typeof(42));
 "number"- that is a "string"
 
@@ -50,17 +52,19 @@ Uncaught SyntaxError: Invalid or unexpected token
 
 typeof(value)
 "undefined"
-``
+```
 
 Some interview questions:
 
-`// Question: What is the value of foo.length? var foo = []; foo.push(1); foo.push(2); 2`
 
-``
-What will be logged and why
+What will be logged and why?
+
+```
 let reaction = 'yikes';
 reaction[0] = 'l';
 console.log(reaction);
+```
+the output will be yikes, because strings are immutable
 
 
 Fibonacci:
